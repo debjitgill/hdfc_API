@@ -1,11 +1,9 @@
-import "./App.css";
+import UpiVerification from "./pages/pages";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">HDFC</header>
-    </div>
-  );
+  return <>
+  <UpiVerification/>
+  </>;
 }
 
 export default App;
