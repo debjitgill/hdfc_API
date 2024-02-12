@@ -30,10 +30,10 @@ const UpiVerification = () => {
         <form onSubmit={handleSubmit}>
           <label>
             UpiID
-            <input type="text" value={formData.upiId} onChange={handleChange}  />
+            <input type="text" name="upiId" value={formData.upiId} onChange={handleChange}  />
           </label>
           Amount
-            <input type="number"  value={formData.amount} onChange={handleChange} />
+            <input type="number"  name="amount" value={formData.amount} onChange={handleChange} />
           <input type="submit" value="Submit" />
         </form>
       </div>
