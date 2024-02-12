@@ -7,7 +7,6 @@ const UpiVerification = () => {
         amount: '',
       });
     
-      // Handle changes to input fields
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prevState => ({
@@ -29,10 +28,10 @@ const UpiVerification = () => {
       <div>
         <form onSubmit={handleSubmit}>
           <label>
-            UpiID
+            UpiID:
             <input type="text" name="upiId" value={formData.upiId} onChange={handleChange}  />
           </label>
-          Amount
+          Amount:
             <input type="number"  name="amount" value={formData.amount} onChange={handleChange} />
           <input type="submit" value="Submit" />
         </form>
