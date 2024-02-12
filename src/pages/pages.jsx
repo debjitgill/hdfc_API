@@ -2,6 +2,8 @@ import React , {useState} from "react";
 
 const UpiVerification = () => {
 
+    const REDIRECT_URL="https://uat.d118gahimc92w7.amplifyapp.com/upi/callBackRes?"
+
     const [formData, setFormData] = useState({
         upiId: '',
         amount: '',
