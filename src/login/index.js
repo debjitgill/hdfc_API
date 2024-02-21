@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/vpacheck`,
+        `https://om2ezknjd3myfdzj4jsxvs3zly0begyq.lambda-url.ap-south-1.on.aws/vpacheck`,
         {
           method: "POST",
           headers: {

@@ -8,7 +8,7 @@ function generateRandom9DigitNumber() {
 }
 const randomNumber = generateRandom9DigitNumber();
 
-const ClientDetails = () => {
+const Test = () => {
   const [msg, setMsg] = useState("");
   const [number, setNumber] = useState([]);
   const [payload, setPayload] = useState({
@@ -46,15 +46,15 @@ const ClientDetails = () => {
           "================================="
         );
         const encryptdata = responseData.encryptdata;
-        if(encryptdata === ""){
-            return false
-        }else {
-            // Construct callback URL
-            const callbackUrl = `https://uat.d118gahimc92w7.amplifyapp.com/upi/callBackRes?meRes=${encryptdata}&pgMerchantId=HDFC000000999009`;
+        // if(encryptdata === ""){
+        //     return false
+        // }else {
+        //     // Construct callback URL
+        //     const callbackUrl = `https://uat.d118gahimc92w7.amplifyapp.com/upi/callBackRes?meRes=${encryptdata}&pgMerchantId=HDFC000000999009`;
 
-            // Redirect to callback URL
-            window.location.href = callbackUrl;
-        }
+        //     // Redirect to callback URL
+        //     window.location.href = callbackUrl;
+        // }
         const token = responseData.token;
         sessionStorage.setItem("token", token);
 
@@ -108,4 +108,4 @@ const ClientDetails = () => {
   );
 };
 
-export default ClientDetails;
+export default Test;
