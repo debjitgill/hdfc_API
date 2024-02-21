@@ -6,11 +6,11 @@ function generateRandom9DigitNumber() {
 
   return randomNumber.toString();
 }
+
 const randomNumber = generateRandom9DigitNumber();
 
 const ClientDetails = () => {
   const [msg, setMsg] = useState("");
-  const [number, setNumber] = useState([]);
   const [payload, setPayload] = useState({
     pgMerchantId: "",
     orderNo: randomNumber,
@@ -20,9 +20,26 @@ const ClientDetails = () => {
     expValue: "10",
     mccCode: "6012",
   });
-  useEffect(() => {
-    
-  }, [payload]);
+
+  const handleHDFCCallback = (callbackData) => {
+    // Make a POST request to your backend's callback endpoint
+    fetch('/upi/callBackRes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(callbackData),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to send callback data to server');
+      }
+      console.log('Callback data sent successfully');
+    })
+    .catch(error => {
+      console.error('Error sending callback data:', error.message);
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,19 +63,22 @@ const ClientDetails = () => {
           "================================="
         );
         const encryptdata = responseData.encryptdata;
-        if(encryptdata === ""){
-            return false
-        }else {
-            // Construct callback URL
-            const callbackUrl = `https://uat.d118gahimc92w7.amplifyapp.com/upi/callBackRes?meRes=${encryptdata}&pgMerchantId=HDFC000000999009`;
+        // if(encryptdata === ""){
+        //     return false
+        // } else {
+        //     // Construct callback URL
+        //     const callbackUrl = `https://uat.d118gahimc92w7.amplifyapp.com/upi/callBackRes?meRes=${encryptdata}&pgMerchantId=HDFC000000999009`;
 
-            // Redirect to callback URL
-            window.location.href = callbackUrl;
-        }
+        //     // Redirect to callback URL
+        //     window.location.href = callbackUrl;
+        // }
         const token = responseData.token;
         sessionStorage.setItem("token", token);
 
         setMsg(responseData.msg);
+
+        // Call handleHDFCCallback function
+        handleHDFCCallback({ encryptdata, pgMerchantId: payload.pgMerchantId });
       } else {
         setMsg("Login Failed");
       }
@@ -75,6 +95,7 @@ const ClientDetails = () => {
       [name]: value,
     }));
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
