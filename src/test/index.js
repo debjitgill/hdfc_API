@@ -12,13 +12,9 @@ const Test = () => {
   const [msg, setMsg] = useState("");
   const [number, setNumber] = useState([]);
   const [payload, setPayload] = useState({
-    pgMerchantId: "",
-    orderNo: randomNumber,
-    payerVA: "",
-    amount: "",
-    remarks: "TEST",
-    expValue: "10",
-    mccCode: "6012",
+    pgMerchantId: "HDFC000000999009",
+    OrderNo: randomNumber,
+    UPITxnID:"6073243",
   });
   useEffect(() => {
     
@@ -28,7 +24,7 @@ const Test = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://om2ezknjd3myfdzj4jsxvs3zly0begyq.lambda-url.ap-south-1.on.aws/initiateTransaction`,
+        `https://om2ezknjd3myfdzj4jsxvs3zly0begyq.lambda-url.ap-south-1.on.aws/transactionStatusQuery`,
         {
           method: "POST",
           headers: {
@@ -88,17 +84,17 @@ const Test = () => {
         <br />
         <input
           type="text"
-          name="payerVA"
-          value={payload.payerVA}
-          placeholder="Enter PayerVA"
+          name="OrderNo"
+          value={payload.OrderNo}
+          placeholder="Enter Orderno"
           onChange={handleChange}
         />
         <br />
         <input
           type="text"
-          name="amount"
-          value={payload.amount}
-          placeholder="Enter Value"
+          name="UPITxnID"
+          value={payload.UPITxnID}
+          placeholder="Enter UPITxnID"
           onChange={handleChange}
         />
         <br />
