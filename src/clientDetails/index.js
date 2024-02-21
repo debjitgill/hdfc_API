@@ -46,16 +46,15 @@ const ClientDetails = () => {
           "================================="
         );
         const encryptdata = responseData.encryptdata;
-        // if(encryptdata === ""){
-        //     return false
-        // }else {
-        //     // Construct callback URL
-        //     const callbackUrl = `https://uat.d118gahimc92w7.amplifyapp.com/upi/callBackRes?meRes=${encryptdata}&pgMerchantId=HDFC000000999009`;
+        if(encryptdata === ""){
+            return false
+        }else {
+            // Construct callback URL
+            const callbackUrl = `https://uat.d118gahimc92w7.amplifyapp.com/upi/callBackRes?meRes=${encryptdata}&pgMerchantId=HDFC000000999009`;
 
-        //     // Redirect to callback URL
-        //     window.location.href = callbackUrl;
-        // }
-        // Extract and store only the token in session storage
+            // Redirect to callback URL
+            window.location.href = callbackUrl;
+        }
         const token = responseData.token;
         sessionStorage.setItem("token", token);
 
