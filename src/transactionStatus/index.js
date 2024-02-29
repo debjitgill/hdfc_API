@@ -70,7 +70,7 @@ const TransactionStatus = () => {
         {<p className='text-center'>{msg}</p>}
       </form>
       )}
-      {/* {valid && <Transaction/>} */}
+      {valid && <p>Thank You </p>}
     </div>
   )
 };

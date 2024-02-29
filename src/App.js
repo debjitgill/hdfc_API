@@ -3,13 +3,13 @@ import Login from "./views/login";
 import ClientDetails from "./clientDetails";
 import Test from "./test";
 import Admin from "./views/admin";
-import Logo from "./asset/hdfcLogo.png"
+import Logo from "./asset/hdfcLogo.jpg"
 function App() {
   return (
     <>
     <div className="position-fixed w-100">
       <div className="d-flex justify-content-center">
-      <img className="w-25" src={Logo}/>
+      <img className="" src={Logo}/>
       </div>
     </div>
       <Admin/>
