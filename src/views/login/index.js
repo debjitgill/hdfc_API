@@ -1,14 +1,11 @@
 import React, { useState,useEffect } from "react";
-
+import Transaction from "../../transactionStatus"
 const Login = () => {
   const [payload, setPayload] = useState({
-    merchant_id: "",
-    merchant_ref_no: "",
     virtual_address: "",
-    transaction_status: "T",
   });
   const [msg, setMsg] = useState("");
-
+  const [valid,setValid] = useState(false)
   useEffect(() => {
     
   }, [payload]);
@@ -28,13 +25,11 @@ const Login = () => {
       );
 
       if (response.ok) {
-        // Parse the response as JSON
         const responseData = await response.json();
-
         const token = responseData.token;
         sessionStorage.setItem("token", token);
-
-        setMsg(responseData.msg);
+        setMsg("");
+        setValid(true)
       } else {
         setMsg("Login Failed");
       }
@@ -52,34 +47,24 @@ const Login = () => {
     }));
   };
   return (
-    <div>
+    <div className='d-flex align-items-center justify-content-center vh-100'>
+      {!valid && (
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="merchant_id"
-          value={payload.merchant_id}
-          placeholder="Enter Merchant ID"
-          onChange={handleChange}
-        />
         <br />
         <input
           type="text"
-          name="merchant_ref_no"
-          value={payload.merchant_ref_no}
-          placeholder="Enter Merchant Ref No"
-          onChange={handleChange}
-        />
-        <br />
-        <input
-          type="text"
+          className="form-control"
           name="virtual_address"
           value={payload.virtual_address}
           placeholder="Enter Virtual Address"
           onChange={handleChange}
         />
         <br />
-        <button type="submit">submit</button>
+        <button type="submit" className="btn btn-primary">submit</button>
+        {<p className='text-center'>{msg}</p>}
       </form>
+      )}
+      {valid && <Transaction/>}
     </div>
   );
 };
