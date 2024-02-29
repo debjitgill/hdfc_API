@@ -21,7 +21,7 @@ const Admin = () => {
             {!valid && (
                 <form onSubmit={handleSubmit} className='w-25'>
                     <input type='text' className='form-control mb-3' placeholder='Enter Your ID' value={userId} onChange={(e) => setUserId(e.target.value)} />
-                    <input type='text' className='form-control mb-3' placeholder='Enter Your Password' value={userPass} onChange={(e) => setUserPass(e.target.value)} />
+                    <input type='password' className='form-control mb-3' placeholder='Enter Your Password' value={userPass} onChange={(e) => setUserPass(e.target.value)} />
                     <button type='submit' className='btn btn-primary'>Submit</button>
                     {<p className='text-center'>{msg}</p>}
                 </form>
