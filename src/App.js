@@ -4,6 +4,7 @@ import ClientDetails from "./clientDetails";
 import Test from "./test";
 import Admin from "./views/admin";
 import Logo from "./asset/hdfcLogo.jpg"
+import TransactionStatus from "./transactionStatus";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
       </div>
     </div>
       <Admin/>
+      {/* <TransactionStatus/> */}
     </>
   );
 }
