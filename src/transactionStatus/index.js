@@ -16,7 +16,7 @@ const TransactionStatus = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://om2ezknjd3myfdzj4jsxvs3zly0begyq.lambda-url.ap-south-1.on.aws/initiateTransaction`,
+        `https://payment.sajagonline.com/initiateTransaction`,
         {
           method: "POST",
           headers: {
