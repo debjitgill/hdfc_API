@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Transaction from "../../transactionStatus";
+
 const Login = () => {
   const [showResponse, setShowResponse] = useState(false);
   const [response, setResponse] = useState("");
@@ -8,32 +9,40 @@ const Login = () => {
   });
   const [msg, setMsg] = useState("");
   const [valid, setValid] = useState(false);
+
   useEffect(() => {}, [payload]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `https://om2ezknjd3myfdzj4jsxvs3zly0begyq.lambda-url.ap-south-1.on.aws/vpacheck`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch(`https://payment.sajagonline.com/vpacheck`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       if (response.ok) {
         const responseData = await response.json();
         setResponse(responseData);
         const token = responseData.token;
         sessionStorage.setItem("token", token);
-        setMsg("");
-        setShowResponse(true);
+        const decryptedResponse = responseData.decryptedResponse;
+        if (
+          decryptedResponse.includes(
+            "Sorry, we are unable to process your request"
+          )
+        ) {
+          setValid(false);
+          setMsg("Failed");
+        } else {
+          setValid(true);
+          setShowResponse(true);
+        }
+        
         setTimeout(() => {
           setShowResponse(false);
-          setValid(true);
         }, 2000);
       } else {
         setMsg("Login Failed");
@@ -51,6 +60,7 @@ const Login = () => {
       [name]: value,
     }));
   };
+
   return (
     <>
       <div className="d-flex align-items-center justify-content-center vh-100">
@@ -75,7 +85,7 @@ const Login = () => {
               <button type="submit" className="btn btn-primary">
                 submit
               </button>
-              {<p className="text-center">{msg}</p>}
+              {<p className="text-center text-danger">{msg}</p>}
             </form>
           )}
           {valid && <Transaction />}
